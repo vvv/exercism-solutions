@@ -1,17 +1,18 @@
 pub fn anagrams_for<'a>(word: &str, inputs: &[&'a str]) -> Vec<&'a str> {
-    let word = sorted_chars(word);
+    let word = word.to_lowercase();
+    let word_sorted = sorted(&word);
     let mut res = vec![];
     for &w in inputs.iter() {
-        let s: String = sorted_chars(w).into_iter().collect();
-        if sorted_chars(w) == word {
+        let wl = w.to_lowercase();
+        if wl != word && sorted(&wl) == word_sorted {
             res.push(w);
         }
     }
     res
 }
 
-fn sorted_chars(word: &str) -> Vec<char> {
+fn sorted(word: &String) -> String {
     let mut chars: Vec<char> = word.chars().collect();
     chars.sort();
-    chars
+    chars.into_iter().collect()
 }

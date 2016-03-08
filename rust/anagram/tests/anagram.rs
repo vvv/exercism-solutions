@@ -46,7 +46,6 @@ fn test_multiple_anagrams() {
 }
 
 #[test]
-#[ignore]
 fn test_case_insensitive_anagrams() {
     let inputs = ["cashregister", "Carthorse", "radishes"];
     let outputs: Vec<&str> = vec!["Carthorse"];
@@ -54,7 +53,6 @@ fn test_case_insensitive_anagrams() {
 }
 
 #[test]
-#[ignore]
 fn test_unicode_anagrams() {
     // These words don't make sense, they're just greek letters cobbled together.
     let inputs = ["ΒΓΑ", "ΒΓΔ", "γβα"];
@@ -72,7 +70,6 @@ fn test_misleading_unicode_anagrams() {
 }
 
 #[test]
-#[ignore]
 fn test_does_not_detect_a_word_as_its_own_anagram() {
     let inputs = ["banana"];
     let outputs: Vec<&str> = vec![];
