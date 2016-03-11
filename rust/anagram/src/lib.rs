@@ -1,9 +1,9 @@
 pub fn anagrams_for<'a>(word: &str, inputs: &[&'a str]) -> Vec<&'a str> {
     let word = word.to_lowercase();
     let word_sorted = sorted(&word);
-    inputs.into_iter().filter_map(|&w| {
+    inputs.to_vec().into_iter().filter(|&w| {
         let wl = w.to_lowercase();
-        if wl != word && sorted(&wl) == word_sorted { Some(w) } else { None }
+        wl != word && sorted(&wl) == word_sorted
     }).collect()
 }
 
