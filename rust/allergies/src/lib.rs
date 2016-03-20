@@ -18,6 +18,9 @@ impl Allergies {
     }
 
     pub fn allergies(&self) -> Vec<Allergen> {
-        vec![]
+        use Allergen::*;
+        let v = vec![Eggs, Peanuts, Shellfish, Strawberries, Tomatoes,
+                     Chocolate, Pollen, Cats];
+        v.into_iter().filter(|a| self.is_allergic_to(a)).collect()
     }
 }
