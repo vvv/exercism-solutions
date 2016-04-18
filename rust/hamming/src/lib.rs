@@ -1,12 +1,8 @@
-pub fn hamming_distance(a: &str, b: &str) -> Result<u32, &'static str> {
+pub fn hamming_distance(a: &str, b: &str) -> Result<usize, &'static str> {
     if a.len() == b.len() {
-        let mut n = 0;
-        for (x, y) in a.chars().zip(b.chars()) {
-            if x != y {
-                n += 1;
-            }
-        }
-        Ok(n)
+        Ok(a.chars().zip(b.chars())
+           .filter(|&(x, y)| x != y)
+           .count())
     } else {
         Err("inputs of different length")
     }
