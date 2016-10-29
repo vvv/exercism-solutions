@@ -1,34 +1,28 @@
-struct Cell {
-    value: usize,
-    reject: bool
-}
+pub struct Sieve;
 
-pub fn primes_up_to(limit: usize) -> Vec<usize> {
-    if limit < 2 {
-        vec![]
-    } else {
-        let nr_elems = limit-1;
-        let mut xs = Vec::with_capacity(nr_elems);
-        for x in 2..limit+1 {
-            xs.push(Cell { value: x, reject: false });
-        }
-        let mut primes = vec![];
-        let mut start = 0;
-        while start < nr_elems {
-            let prime = xs[start].value;
-            primes.push(prime);
-            // Mark multiples of `prime'.
-            let mut cur = start + prime;
-            while cur < nr_elems {
-                xs[cur].reject = true;
-                cur += prime;
+impl Sieve {
+    pub fn primes_up_to(n: usize) -> Vec<usize> {
+        let mut rejected = vec![false; n+2]; // Size 2 larger than n
+                                             // for simpler indexes.
+        let mut primes = Vec::with_capacity(p_n_upper_bound(n));
+
+        for i in 2..n+1 {
+            if rejected[i] {
+                continue;
             }
-            // Find position of next prime.
-            start += 1;
-            while start < nr_elems && xs[start].reject {
-                start += 1;
+            primes.push(i);
+            // Eliminate multiples of i.
+            let mut j = 2*i;
+            while j <= n {
+                rejected[j] = true;
+                j += i;
             }
         }
         primes
     }
+}
+
+fn p_n_upper_bound(x: usize) -> usize {
+    let x = x as f64;
+    (x / (x.ln() - 4.0).abs()) as usize
 }
