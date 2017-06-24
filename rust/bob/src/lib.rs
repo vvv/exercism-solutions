@@ -1,7 +1,7 @@
 pub fn reply(phrase: &str) -> &str {
     if phrase.trim().is_empty() {
         "Fine. Be that way!"
-    } else if phrase.ends_with("?") {
+    } else if phrase.trim_right().ends_with("?") {
         "Sure."
     } else {
         let s = phrase.trim_matches(|c: char| !c.is_alphabetic());
