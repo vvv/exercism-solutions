@@ -12,7 +12,7 @@ fn set_primes(a: &mut Vec<bool>) {
 }
 
 pub fn nth(n: u32) -> Result<u32, &'static str> {
-    let ulimit = 1000000;
+    let ulimit = 1_000_000;
     if n < 1 || n as usize > ulimit {
         return Err("Out of bounds");
     }

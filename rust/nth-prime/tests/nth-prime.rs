@@ -17,7 +17,7 @@ fn test_sixth_prime() {
 
 #[test]
 fn test_big_prime() {
-    assert_eq!(np::nth(10001), Ok(104743));
+    assert_eq!(np::nth(10_001), Ok(104_743));
 }
 
 #[test]
