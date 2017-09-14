@@ -1,3 +1,26 @@
+/// See http://exercism.io/submissions/3dc698f957dc46b7afcb3f7a66c39a51
+
+// pub fn nth(n: usize) -> Result<i32, &'static str> {
+//     if n == 0 {
+//         return Err("invalid n");
+//     }
+
+//     // Fill in primes < 6 so we can skip 2/3 of candidates.
+//     let mut primes: Vec<i32> = vec![2, 3, 5];
+//     let mut candidate: i32 = 5;
+//     while primes.len() < n {
+//         while {
+//             candidate += if candidate % 6 == 5 { 2 } else { 4 };
+//             (&primes)
+//                 .into_iter()
+//                 .take_while(|&p| p * p <= candidate)
+//                 .any(|&p| candidate % p == 0)
+//         } {}
+//         primes.push(candidate);
+//     }
+//     Ok(primes[n - 1])
+// }
+
 fn set_primes(a: &mut Vec<bool>) {
     let len = a.len();
     for i in 0..len {
