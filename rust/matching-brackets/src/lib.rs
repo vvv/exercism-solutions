@@ -10,12 +10,7 @@ pub fn brackets_are_balanced(string: &str) -> bool {
         for (open, close) in braces.iter() {
             if c == *open {
                 stack.push(open);
-            } else if c == *close {
-                if let Some(x) = stack.pop() {
-                    if x == open {
-                        continue;
-                    }
-                }
+            } else if c == *close && stack.pop() != Some(open) {
                 return false;
             }
         }
