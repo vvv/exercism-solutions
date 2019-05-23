@@ -1,36 +1,23 @@
-enum Op {
-    Square,
-    Curly,
-    Round,
-}
-
 pub fn brackets_are_balanced(string: &str) -> bool {
+    let braces = [
+        ('[', ']'),
+        ('{', '}'),
+        ('(', ')'),
+    ];
     let mut stack = Vec::new();
+
     for c in string.chars() {
-        match c {
-            '[' => stack.push(Op::Square),
-            ']' => match stack.pop() {
-                Some(Op::Square) => continue,
-                _ => return false,
-            },
-
-            '{' => stack.push(Op::Curly),
-            '}' => {
-                if let Some(Op::Curly) = stack.pop() {
-                    continue;
+        for (open, close) in braces.iter() {
+            if c == *open {
+                stack.push(open);
+            } else if c == *close {
+                if let Some(x) = stack.pop() {
+                    if x == open {
+                        continue;
+                    }
                 }
                 return false;
-            },
-
-            '(' => stack.push(Op::Round),
-            ')' => {
-                if let Some(Op::Round) = stack.pop() {
-                    continue;
-                }
-                return false;
-            },
-
-            _ => continue,
+            }
         }
     }
     stack.is_empty()
