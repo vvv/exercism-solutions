@@ -22,10 +22,10 @@ impl Clock {
         if mins < 0 {
             mins += MINUTES_IN_DAY;
         }
-        let (h, m) = mins.div_rem(&60);
+        let (hours, minutes) = mins.div_rem(&60);
         Clock {
-            hours: h,
-            minutes: m,
+            hours,
+            minutes,
         }
     }
 
