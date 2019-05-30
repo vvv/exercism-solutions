@@ -1,3 +1,5 @@
+extern crate num_integer;
+use num_integer::Integer;
 use std::fmt;
 
 #[derive(Debug, PartialEq)]
@@ -14,21 +16,20 @@ impl fmt::Display for Clock {
 
 impl Clock {
     pub fn new(hours: i32, minutes: i32) -> Self {
-        let mut mins = (hours * 60 + minutes) % (24 * 60);
+        const MINUTES_IN_DAY: i32 = 24 * 60;
+
+        let mut mins = (hours * 60 + minutes) % MINUTES_IN_DAY;
         if mins < 0 {
-            mins += 24 * 60;
+            mins += MINUTES_IN_DAY;
         }
+        let (h, m) = mins.div_rem(&60);
         Clock {
-            hours: mins / 60,
-            minutes: mins % 60,
+            hours: h,
+            minutes: m,
         }
     }
 
     pub fn add_minutes(&self, minutes: i32) -> Self {
         Clock::new(self.hours, self.minutes + minutes)
-    }
-
-    pub fn to_string(&self) -> String {
-        format!("{}", self)
     }
 }
